@@ -1,0 +1,1 @@
+print("Running through a maze")
