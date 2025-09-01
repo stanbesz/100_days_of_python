@@ -45,6 +45,7 @@ while auction_active:
 
 
 def highest_bidder(auction_bids):
+    
     highest_bid = 0
     name_highest_bidder = ""
 
