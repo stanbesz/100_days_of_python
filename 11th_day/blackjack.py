@@ -22,12 +22,30 @@ print("""
 
 game_active = True
 
-dealer_hand = []
-dealer_score = 0
-player_hand = []
-player_score = 0
+
+def end_conditions(player_score,dealer_score):
+    if player_score > 21:
+        print("You have busted... You lose")
+        return
+
+    if dealer_score > 21:
+        print("The dealer has busted... You win")
+        return
+
+    if dealer_score > player_score:
+        print("You have lost :( Sorry!")
+    elif dealer_score < player_score:
+        print("You have won :) congrats!")
+    elif dealer_score == player_score:
+        print("It is a draw!!!")
+
 
 while game_active:
+    dealer_hand = []
+    dealer_score = 0
+    player_hand = []
+    player_score = 0
+
     dealer_hand.append(rand.choice(cards))
     print(f"Dealer has the following cards: {dealer_hand}")
 
@@ -37,16 +55,24 @@ while game_active:
     choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
 
     if choice_option == "y":
-        player_score = sum(player_hand)
-        while choice_option == "y" and player_score <= 21:
+        while choice_option == "y":
             player_hand.append(rand.choice(cards))
-            print(f"You have the following cards: {player_hand}")
-            choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
+            player_score = sum(player_hand)
+
+            if player_score > 21:
+                break
+            else:
+                print(f"You have the following cards: {player_hand}")
+                choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
+
     elif choice_option == "n":
         dealer_score = sum(dealer_hand)
         while dealer_score < 17:
             dealer_hand.append(rand.choice(cards))
             dealer_score = sum(dealer_hand)
+
+            if dealer_score > 21:
+                break
 
     elif choice_option == "exit":
         print("Please come again")
@@ -55,9 +81,6 @@ while game_active:
         print("Error with input")
         break
 
-    if dealer_score > player_score:
-        print("You have lost :( Sorry!")
-    elif dealer_score < player_score:
-        print("You have won :) congrats!")
-    elif dealer_score == player_score:
-        print("It is a draw!!!")
+    player_score = sum(player_hand)
+
+    end_conditions(player_score,dealer_score)
