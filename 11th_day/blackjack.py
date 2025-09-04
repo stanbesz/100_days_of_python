@@ -39,6 +39,40 @@ def end_conditions(player_score,dealer_score):
     elif dealer_score == player_score:
         print("It is a draw!!!")
 
+def score_calculation_player(player_hand,choice_option):
+    while choice_option == "y":
+            add_hand = rand.choice(cards)
+            player_hand.append(add_hand)
+            if add_hand == 11 and sum(player_hand) > 21:
+                player_hand.pop()
+                player_hand.append(1)
+                player_score = sum(player_hand)
+            else:
+                player_score = sum(player_hand)
+
+            if player_score > 21:
+                return player_score
+            else:
+                print(f"You have the following cards: {player_hand}")
+                choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
+    return player_score
+
+def score_calculation_dealer(dealer_hand):
+        dealer_score = sum(dealer_hand)
+        while dealer_score < 17:
+            add_hand = rand.choice(cards)
+            dealer_hand.append(add_hand)
+            if add_hand == 11 and sum(dealer_hand) > 21:
+                dealer_hand.pop()
+                dealer_hand.append(1)
+                dealer_score = sum(dealer_hand)
+            else:
+                dealer_score = sum(dealer_hand)
+
+
+            if dealer_score > 21:
+                return dealer_score
+        return dealer_score
 
 while game_active:
     dealer_hand = []
@@ -55,24 +89,10 @@ while game_active:
     choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
 
     if choice_option == "y":
-        while choice_option == "y":
-            player_hand.append(rand.choice(cards))
-            player_score = sum(player_hand)
-
-            if player_score > 21:
-                break
-            else:
-                print(f"You have the following cards: {player_hand}")
-                choice_option = input("Do you want to hit or stand? Type 'y' for hit, 'n' for stand and 'exit' for exiting the game: ").lower()
+        player_score = score_calculation_player(player_hand,choice_option)
 
     elif choice_option == "n":
-        dealer_score = sum(dealer_hand)
-        while dealer_score < 17:
-            dealer_hand.append(rand.choice(cards))
-            dealer_score = sum(dealer_hand)
-
-            if dealer_score > 21:
-                break
+        dealer_score = score_calculation_dealer(dealer_hand)
 
     elif choice_option == "exit":
         print("Please come again")
