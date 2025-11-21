@@ -33,14 +33,15 @@ while len(states_manager.guessed_states)<50:
     print(country_ind)
 
     if answer_state == "exit":
-        for state in state_list.values():
-            state = state.title()
-            if state not in states_manager.guessed_states:
-                missing_states.append(state.title())
+        missing_states = [state for state in state_list.values() if state not in states_manager.guessed_states]
+        # for state in state_list.values():
+        #     state = state.title()
+        #     if state not in states_manager.guessed_states:
+        #         missing_states.append(state.title())
                 
 
-            else:
-                pass
+        #     else:
+        #         pass
         break
 
     if country_ind is not None:
