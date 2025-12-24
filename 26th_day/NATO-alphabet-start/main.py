@@ -32,7 +32,35 @@ print(alpha_mapped)
 
 
 #TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-user_input = input("Enter your name: ").upper()
-list_user_name = [alpha_mapped[letter] for letter in user_input]
-print(list_user_name)
+#Error handling version 1
+# try:
+#     user_input = input("Enter your name: ").upper()
+#     list_user_name = [alpha_mapped[letter] for letter in user_input]
+# except KeyError as msg:
+#     print("Invalid input, please enter only numbers!")
+#     valid_input = False
+#     while not valid_input:
+#         try:
+#             user_input = input("Enter your name: ").upper()
+#             list_user_name = [alpha_mapped[letter] for letter in user_input]
+#         except KeyError as msg:
+#             print("Invalid input, please enter only numbers!")
+#         else:
+#             print(list_user_name)
+#             valid_input = True
+# else:
+#     print(list_user_name)
+
+# Error handling version 2
+def generate_name():
+    user_input = input("Enter your name: ").upper()
+    try:
+        list_user_name = [alpha_mapped[letter] for letter in user_input]
+    except KeyError as msg:
+        print("Invalid input, please enter only numbers!")
+        generate_name()
+    else:
+        print(list_user_name)
+
+generate_name()
 
