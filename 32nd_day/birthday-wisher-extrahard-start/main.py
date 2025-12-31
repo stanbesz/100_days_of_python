@@ -34,7 +34,7 @@ def send_birthday_mail(name,email,birthday_letters):
     with smtplib.SMTP("smtp.gmail.com") as connection: # Same as the file reading/writing
         connection.starttls() #make connection secure
         connection.login(user=my_email,password=password)
-        connection.sendmail(from_addr=my_email,to_addrs="stanbe_sz@abv.bg",msg=f"Subject: Happy Birthday {name} \n\n {name_letter}")
+        connection.sendmail(from_addr=my_email,to_addrs=email,msg=f"Subject: Happy Birthday {name} \n\n {name_letter}")
 
 def send_emails(now_day,now_month,birthday_letters,birthday_map):
 
