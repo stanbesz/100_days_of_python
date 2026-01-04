@@ -9,6 +9,7 @@ OMW_API_KEY = os.environ.get("OMW_API_KEY")
 
 account_sid = os.getenv("TWILLIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+phone_number = os.getenv("PHONE_NUMBER")
 
 params = {
     "lat":43.856258, # currently in Sofia
@@ -38,6 +39,6 @@ if bring_umbrella:
     client = Client(account_sid,TWILIO_AUTH_TOKEN)
     message = client.messages.create(body="It's going to rain today. Please bring an umbrella1 ☔",
                                      from_="+12209460604",
-                                     to="+359895411678")
+                                     to=phone_number)
     
-    print(message.sid)
+    # print(message.sid)
